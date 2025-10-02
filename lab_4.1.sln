@@ -1,0 +1,50 @@
+
+#include <iostream>
+#include <cmath> 
+using namespace std;
+
+int main()
+{  
+    int N;
+    double S;
+
+    cout << "N >= ";
+    cin >> N;
+
+    S = 0;
+    int j = 2; 
+    while (j <= N)
+    {
+       
+        S += (1.0 * j * (N - j)) / (j * j + (N - j) * (N - j));
+        j++; 
+    }
+    cout << "while " << S << endl;
+    
+    S = 0;
+    j = 2;
+    
+    if (N >= 2) {
+        do {
+            S += (1.0 * j * (N - j)) / (j * j + (N - j) * (N - j));
+            j++;
+        } while (j <= N);
+    }
+    cout << "do-while " << S << endl;
+
+    S = 0;
+    for (j = 2; j <= N; j++)
+    {
+        S += (1.0 * j * (N - j)) / (j * j + (N - j) * (N - j));
+    }
+    cout << "for " << S << endl;
+
+    S = 0;
+    for (j = N; j >= 2; j--)
+    {
+        S += (1.0 * j * (N - j)) / (j * j + (N - j) * (N - j));
+    }
+    cout << "for " << S << endl;
+
+    return 0;
+}
