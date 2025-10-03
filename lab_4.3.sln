@@ -1,31 +1,93 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36518.9 d17.14
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab_4.3", "lab_4.3\lab_4.3.vcxproj", "{69D4A898-3BDC-4883-8972-D7B6973F526F}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{69D4A898-3BDC-4883-8972-D7B6973F526F}.Debug|x64.ActiveCfg = Debug|x64
-		{69D4A898-3BDC-4883-8972-D7B6973F526F}.Debug|x64.Build.0 = Debug|x64
-		{69D4A898-3BDC-4883-8972-D7B6973F526F}.Debug|x86.ActiveCfg = Debug|Win32
-		{69D4A898-3BDC-4883-8972-D7B6973F526F}.Debug|x86.Build.0 = Debug|Win32
-		{69D4A898-3BDC-4883-8972-D7B6973F526F}.Release|x64.ActiveCfg = Release|x64
-		{69D4A898-3BDC-4883-8972-D7B6973F526F}.Release|x64.Build.0 = Release|x64
-		{69D4A898-3BDC-4883-8972-D7B6973F526F}.Release|x86.ActiveCfg = Release|Win32
-		{69D4A898-3BDC-4883-8972-D7B6973F526F}.Release|x86.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {23CA5AB6-166C-46A3-BFDF-4252CA0D0E2A}
-	EndGlobalSection
-EndGlobal
+// Lab_04_3.cpp
+// < Лесів Божена >
+// Лабораторна робота № 4.3
+// Табуляція функції, заданої формулою: функція з параметрами.
+// Варіант 16
+
+#include <iostream>
+#include <iomanip> 
+#include <cmath>  
+
+int main() {
+   
+
+    double x_start, x_end, dx, a, b, c;
+
+  
+    std::cout << " X : ";
+    std::cin >> x_start;
+
+    do {
+        std::cout << " X1  ";
+        std::cin >> x_end;
+        if (x_end < x_start) {
+            std::cout << " X1>= X\n";
+        }
+    } while (x_end < x_start);
+
+    do {
+        std::cout << " dX (dX > 0) ";
+        std::cin >> dx;
+        if (dx <= 0) {
+            std::cout << " dX>0 \n";
+        }
+    } while (dx <= 0);
+
+    std::cout << "a: "; std::cin >> a;
+    std::cout << " b: "; std::cin >> b;
+    std::cout << " c: "; std::cin >> c;
+
+ 
+    std::cout << "+---------------------------+\n";
+    std::cout << "|      x      |       F       |\n";
+    std::cout << "+---------------------------+\n";
+
+
+    for (double x = x_start; x <= x_end; x += dx) {
+        double F;
+        bool is_defined = true; 
+
+        if (x == 0) {
+            if (b != 0) {
+               
+                if ((x - a) == 0) { 
+                    is_defined = false;
+                }
+                else {
+                    F = (a * pow(x + c, 2) - b) / (x - a);
+                }
+            }
+            else { 
+              
+                F = -c;
+            }
+        }
+        else {
+            
+          
+            if (c == 0) { 
+                is_defined = false;
+            }
+            else {
+                F = a + x / c;
+            }
+        }
+
+       
+        std::cout << std::fixed << std::setprecision(3);
+
+       
+        std::cout << "| " << std::setw(11) << x << " | ";
+        if (is_defined) {
+            std::cout << std::setw(13) << F << " |\n";
+        }
+        else {
+            std::cout << std::setw(13) << "?" << " |\n";
+        }
+    }
+
+    std::cout << "+---------------------------+\n";
+
+    return 0;
+}
