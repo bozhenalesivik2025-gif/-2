@@ -1,0 +1,44 @@
+#include <iostream>
+#include <iomanip>
+#include <ctime>   
+#include <cstdlib> 
+
+using namespace std;
+
+int main()
+{
+
+    double x, y;
+    const int N = 10; 
+
+    srand((unsigned)time(NULL));
+
+    cout << " 16.  2:  " << endl;
+    cout << "generation " << N << "  x, y є [-2; 2]" << endl;
+    cout << "--------------------------------------------------------" << endl;
+
+    
+    cout << fixed << setprecision(4);
+
+    for (int i = 0; i < N; i++)
+    {
+        
+        x = 4.0 * rand() / RAND_MAX - 2.0;
+        y = 4.0 * rand() / RAND_MAX - 2.0;
+
+     
+        if ((y <= -x * x + 2) && (y >= x) && (y >= 0))
+        {
+           
+            cout << "shoot " << setw(2) << i + 1 << ": x = " << setw(8) << x
+                << ", y = " << setw(8) << y << " ->yes" << endl;
+        }
+        else
+        {
+            cout << "shoot " << setw(2) << i + 1 << ": x = " << setw(8) << x
+                << ", y = " << setw(8) << y << " ->  (no)" << endl;
+        }
+    }
+
+    return 0;
+}
