@@ -1,54 +1,62 @@
 #include <iostream>
-#include <cmath> 
-#include <iomanip> 
+#include <iomanip>
+#include <cmath>
 
-int main() {
+using namespace std;
 
-    std::cout << " P = П(i=1..3) П(j=1..4-i) sqrt(|tg(i)|) / (i + j^2)" << std::endl;
-    std::cout << "------------------------------------------------------------------" << std::endl;
+int main()
+{
+    double P1, P2;
+    int i, j;
 
-
-    double result_while = 1.0;
-    int i = 1;
+    cout << " while:" << endl;
+    P1 = 1.0;
+    i = 1;
     while (i <= 3) {
-        int j = 1;
+        P2 = 1.0;
+        j = i;
         while (j <= (4 - i)) {
-            result_while *= sqrt(fabs(tan(i))) / (i + j * j);
+            P2 *= sqrt(abs(tan(i))) / (double)(i + j * j);
             j++;
         }
+        P1 *= P2;
         i++;
     }
-    std::cout << "1) while: " << std::fixed << std::setprecision(15) << result_while << std::endl;
+    cout << P1 << endl << endl;
 
-    double result_do_while = 1.0;
+    cout << "Результат (do-while):" << endl;
+    P1 = 1.0;
     i = 1;
     do {
-        int j = 1;
-        if (j <= (4 - i)) { 
+        P2 = 1.0;
+        j = i;
+        if (j <= (4 - i)) {
             do {
-                result_do_while *= sqrt(fabs(tan(i))) / (i + j * j);
+                P2 *= sqrt(abs(tan(i))) / (double)(i + j * j);
                 j++;
             } while (j <= (4 - i));
         }
+        P1 *= P2;
         i++;
     } while (i <= 3);
-    std::cout << "2) do-while:  " << std::fixed << std::setprecision(15) << result_do_while << std::endl;
+    cout << P1 << endl << endl;
 
-    double result_for_up = 1.0;
-    for (int i_up = 1; i_up <= 3; i_up++) {
-        for (int j_up = 1; j_up <= (4 - i_up); j_up++) {
-            result_for_up *= sqrt(fabs(tan(i_up))) / (i_up + j_up * j_up);
+    cout << "for:" << endl;
+    P1 = 1.0;
+    for (i = 1; i <= 3; i++) {
+        P2 = 1.0;
+        for (j = i; j <= (4 - i); j++) {
+            P2 *= sqrt(abs(tan(i))) / (double)(i + j * j);
         }
+        P1 *= P2;
     }
-    std::cout << "3)  for (i++, j++): " << std::fixed << std::setprecision(15) << result_for_up << std::endl;
+    cout << P1 << endl << endl;
 
-    double result_for_down = 1.0;
-    for (int i_down = 3; i_down >= 1; i_down--) {
-        for (int j_down = (4 - i_down); j_down >= 1; j_down--) {
-            result_for_down *= sqrt(fabs(tan(i_down))) / (i_down + j_down * j_down);
+    cout << "for:" << endl;
+    P1 = 1.0;
+    for (i = 3; i >= 1; i--) {
+        P2 = 1.0;
+        for (j = (4 - i); j >= i; j--) {
+            P2 *= sqrt(abs(tan(i))) / (double)(i + j * j);
         }
-    }
-    std::cout << "4)  for (i--, j--): " << std::fixed << std::setprecision(15) << result_for_down << std::endl;
-
-    return 0;
-}
+        P1 *= P2;
