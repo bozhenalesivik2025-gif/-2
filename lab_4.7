@@ -1,0 +1,60 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+ 
+    double xp, xk, x, dx, eps, a = 0, R = 0, S = 0, y = 0;
+    int n = 0;
+
+    cout << "x (xp > 0): "; cin >> xp;
+    cout << "x (xk >= xp): "; cin >> xk;
+    cout << "(dx > 0): "; cin >> dx;
+    cout << "(eps > 0): "; cin >> eps;
+
+    
+    if (xp <= 0 || xk < xp || dx <= 0 || eps <= 0) {
+        cout << "Помилка: Введені дані некоректні. x має бути > 0." << endl;
+        return 1; 
+    }
+
+    cout << fixed; 
+    cout << "-------------------------------------------------" << endl;
+    cout << "|" << setw(8) << "x" << " |"
+        << setw(13) << "ln(x)" << " |"
+        << setw(13) << "S (ряд)" << " |"
+        << setw(5) << "n" << " |"
+        << endl;
+    cout << "-------------------------------------------------" << endl;
+
+    x = xp;
+    while (x <= xk)
+    {
+        y = (x - 1) / (x + 1);
+        n = 0;
+        a = 2 * y;
+        S = a;
+
+        do {
+            n++;
+            R = y * y * (2.0 * n - 1) / (2.0 * n + 1);
+            a *= R;
+            S += a;
+        } while (abs(a) >= eps);
+
+        cout << "|" << setw(8) << setprecision(2) << x << " |"
+            << setw(13) << setprecision(8) << log(x) << " |" 
+            << setw(13) << setprecision(8) << S << " |"
+            << setw(5) << n << " |"
+            << endl;
+
+        x += dx;
+    }
+
+    cout << "-------------------------------------------------" << endl;
+
+    return 0;
+}
